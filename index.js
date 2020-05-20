@@ -48,7 +48,7 @@ console.log(getYears(getFinals));
 
 function getWinners(winnersArray) {
     const finalsWinner = winnersArray(fifaData);
-    const winners = finalsWinner.map(item =>{
+    const winners = finalsWinner.map(item => {
        const homeGoals = item["Home Team Goals"];
        const awayGoals = item["Away Team Goals"];
         if (homeGoals > awayGoals) {
@@ -88,7 +88,7 @@ function getWinnersByYear() {
             country = `Draw`;
         }
         return accumulator + `In ${currentElement["Year"]}, ${country} won the world cup!\n`;
-    },"");
+    }, "");
    
     return winnerByYear;
 };
@@ -97,13 +97,33 @@ console.log(getWinnersByYear(getWinners, getYears));
 
 /* Task 7: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
+function getAverageGoals(data) {
 
     /* code here */
+    // Per match:
+        // Define total amount of home team goals
+        // And total amount of away team goals
 
+    // 1.
+    // Need to know how many mathces there are
+    const matches = data.length;
+    // 2.
+    // Define total amount of home goals
+    const homeGoals = data.reduce((accumulator, currentValue) => {
+        // return my found data
+        return accumulator + currentValue["Home Team Goals"];
+    }, 0);
+    const awayGoals = data.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue["Away Team Goals"];
+    }, 0);
+    const homeAverage = homeGoals / matches;
+    const awayAverage = awayGoals / matches;
+
+    console.log(`The home average is: ${Math.round(homeAverage)}`);
+    console.log(`The away average is: ${Math.round(awayAverage)}`);
 };
 
-getAverageGoals();
+getAverageGoals(fifaData);
 
 /// STRETCH 🥅 //
 
